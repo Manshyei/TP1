@@ -11,7 +11,6 @@ public class TP1 {
 		
 		String[] nome = new String[10], endereco = new String[10], telefone = new String[10], nomep = new String[10], descricao = new String[10], porcentagem = new String[10], valor = new String[10]; //Dados dos clientes e produtos a serem cadastrados; 
 		String pesquisa, resposta; //Strings usadas para pesquisas e respostas ao longo do programa;
-		String[] comprador = new String[10];//Registro de clientes que compraram;
 		Scanner Leitor = new Scanner (System.in), Ler = new Scanner (System.in);
 		
 		
@@ -67,7 +66,7 @@ public class TP1 {
 				pesquisa = Ler.nextLine();
 				
 				//Busca por cliente;
-				for (i = 0; i < numClientes; i ++) 	if (nome[i].equals(pesquisa)) break;
+				for (i = 0; i < numClientes; i ++) 	if (pesquisa.equals(nome[i])) break;
 				
 				//Alteração de dados;
 				if (i == numClientes) {System.out.println ("Cliente não encontrado!\nVoltando ao menu...\n"); try { Thread.sleep (1500); } catch (InterruptedException ex) {}}
@@ -170,7 +169,7 @@ public class TP1 {
 				pesquisa = Ler.nextLine();
 				
 				//Busca por produto;
-				for (i = 0; i < numProdutos; i ++) 	if (nomep[i].equals(pesquisa)) break;
+				for (i = 0; i < numProdutos; i ++) 	if (pesquisa.equals(nomep[i])) break;
 				
 				//Alteração de dados;
 				if (i == numProdutos) {System.out.println ("Produto não encontrado!\nVoltando ao menu...\n"); try { Thread.sleep (1500); } catch (InterruptedException ex) {}}
@@ -250,8 +249,13 @@ public class TP1 {
 				
 				//Nome a ser escolhido;
 				System.out.println ("Digite o nome do cliente a ser escolhido: ");
-				comprador[j] = Ler.nextLine();
-				j ++;
+				pesquisa = Ler.nextLine();
+				
+				//Busca por cliente;
+				for (i = 0; i < numClientes; i ++) 	if (pesquisa.equals(nome[i])) break;
+				
+				//Alteração de dados;
+				if (i == numClientes) {System.out.println ("Cliente não encontrado!\nVoltando ao menu...\n"); try { Thread.sleep (1500); } catch (InterruptedException ex) {} continue;}
 				
 				while (true) {
 				
@@ -321,12 +325,22 @@ public class TP1 {
 			}
 			else if (opcao == 6) {
 				
+				if (numProdutos == 0) {
+					
+					System.out.println ("Ainda não foi cadastrado nenhum produto!\nVoltando ao menu...\n");
+					try { Thread.sleep (1500); } catch (InterruptedException ex) {}
+				
+					continue;
+					
+				}
+				
 				System.out.println ("Lista de produtos com a quantidade em estoque de cada:");
 				for (i = 0; i < numProdutos; i ++) System.out.println ("-" + nomep[i] + " -" + quantidade[i] + " unidades");
 				System.out.println ("\n");
 				
 			}
 			else if (opcao == 7) {System.out.println ("Volte mais vezes, obrigado!"); break;} //Sair do programa;
+			else {System.out.println ("Opção não encontrada, tente novamente!\n"); try { Thread.sleep (1500); } catch (InterruptedException ex) {}}
 		
 		}
 		
